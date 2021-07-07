@@ -1,4 +1,4 @@
-import * as playLight from 'playwright-lighthouse'
+import { playAudit } from './playAudit'
 import playwright from 'playwright'
 import uaParser from 'ua-parser-js'
 const chai = require('chai')
@@ -10,25 +10,17 @@ before(async () => {
         headless: false ,
         args: ['--remote-debugging-port=9222'],
         viewport: {
-            width: 720,
-            height: 1280,
+            width: 1280,
+            height: 720,
         },
-        deviceScaleFactor: 1
-    //  args: ['--disable-dev-shm-usage', '--no-sandbox', '--disable-gpu', '--use-gl=swiftshader','--enable-webgl']
+        deviceScaleFactor: 2.625
     })
-    // context = await browser.newContext(device);
-    
     context = await browser.newContext();
-
-
     let page = await context.newPage()
     const getUA = await page.evaluate(() => navigator.userAgent);
     global.userAgent = uaParser(getUA).ua;
     global.page = page
     global.isHear = false
-    // console.log(process.argv)
-    // Set balance on Local
-
 
 })
 after(async()=> {
@@ -36,13 +28,11 @@ after(async()=> {
     await browser.close()
 })
 it('TC000_Full_Smoke Check Performance', async () => {
-    let _requestjs = {"memberId": 1001010,"memberName":"GJ62Pjtn","language":"vi-VN","currency":"$US","seq":"d,y,lumi","siteId":"4100300","ip":"","isMobi":true,"browserUserAgent": userAgent,"auth":{"clientId":"gamesimulator","clientSecret":"gamesimulator@20luminet&"},"token":null,"redirectUrl":"#","verifyResult":null,"gameId":0,"setting":{"owUrl":""},"domain":"example.com","localhost":null,"resource":null}
+    let _requestjs = {"memberId": 1001052,"memberName":"GJ62Pjtn","language":"vi-VN","currency":"$US","seq":"d,y,lumi","siteId":"4100300","ip":"","isMobi":true,"browserUserAgent": userAgent,"auth":{"clientId":"gamesimulator","clientSecret":"gamesimulator@20luminet&"},"token":null,"redirectUrl":"#","verifyResult":null,"gameId":0,"setting":{"owUrl":""},"domain":"example.com","localhost":null,"resource":null}
     let pg = await chai.request("https://gamelobby-simulator.lumigame.com/signin").post("/sso").send(_requestjs)
     console.log(pg.text)
     const obj = JSON.parse(pg.text);
-    await page.goto(obj.redirectUrl)
-    // await page.close()
-    // await lighthouse(obj.redirectUrl, {port: 9222, disableStorageReset: true})
+    await page.goto("https://google.com")
     const config = {
         extends: 'lighthouse:default',
         settings: {
@@ -51,7 +41,7 @@ it('TC000_Full_Smoke Check Performance', async () => {
           formFactor: 'desktop',
           screenEmulation: {
             mobile: false,
-            deviceScaleFactor: 1,
+            deviceScaleFactor: 2.625,
             width: 1280,
             height: 720,
             disabled: false,
@@ -59,11 +49,16 @@ it('TC000_Full_Smoke Check Performance', async () => {
           emulatedUserAgent: userAgent
         }
     }
-    await page.waitForURL(/https:\/\/l1-m.lumigame.com/)
-    // await page.waitForLoadState()
-    // await page.waitForTimeout(3000)
-    await playLight.playAudit({
-        page : page,
+    let defaultThresholds= {
+        performance: 0,
+        accessibility: 100,
+        'best-practices': 100,
+        seo: 100,
+        pwa: 100,
+    }
+    await playAudit({
+        page: page,
+        url : obj.redirectUrl,
         port: 9222,
         reports: {
             formats: {
@@ -74,9 +69,13 @@ it('TC000_Full_Smoke Check Performance', async () => {
             name: `lighthouse-${new Date().getTime()}`, //defaults to `lighthouse-${new Date().getTime()}`
             directory: `${process.cwd()}/lighthouse`, //defaults to `${process.cwd()}/lighthouse`
         },
+        thresholds: {
+            performance : 0
+        },
         opts: {
             disableStorageReset : true
         },
         config: config,
+        ua : userAgent
     })
 })
