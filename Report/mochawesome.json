@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 0,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2021-07-07T08:13:24.154Z",
+    "end": "2021-07-07T08:14:13.413Z",
+    "duration": 49259,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a41647f9-0174-4e2a-80cc-eaff013706f6",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [
+        {
+          "title": "\"before all\" hook in \"{root}\"",
+          "fullTitle": "\"before all\" hook in \"{root}\"",
+          "timedOut": false,
+          "duration": 1215,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "var self = this,\n    args = arguments;\nreturn new Promise(function (resolve, reject) {\n  var gen = fn.apply(self, args);\n  function _next(value) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n  }\n  function _throw(err) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n  }\n  _next(undefined);\n});",
+          "err": {},
+          "uuid": "e02c0e98-6110-424c-ac8f-200b43ca1267",
+          "parentUUID": "a41647f9-0174-4e2a-80cc-eaff013706f6",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "afterHooks": [
+        {
+          "title": "\"after all\" hook in \"{root}\"",
+          "fullTitle": "\"after all\" hook in \"{root}\"",
+          "timedOut": false,
+          "duration": 668,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "var self = this,\n    args = arguments;\nreturn new Promise(function (resolve, reject) {\n  var gen = fn.apply(self, args);\n  function _next(value) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n  }\n  function _throw(err) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n  }\n  _next(undefined);\n});",
+          "err": {},
+          "uuid": "3eb51e69-559a-48a6-b1f3-69208d564849",
+          "parentUUID": "a41647f9-0174-4e2a-80cc-eaff013706f6",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "tests": [
+        {
+          "title": "TC000_Full_Smoke Check Performance",
+          "fullTitle": "TC000_Full_Smoke Check Performance",
+          "timedOut": false,
+          "duration": 47366,
+          "state": "failed",
+          "speed": null,
+          "pass": false,
+          "fail": true,
+          "pending": false,
+          "context": null,
+          "code": "var self = this,\n    args = arguments;\nreturn new Promise(function (resolve, reject) {\n  var gen = fn.apply(self, args);\n  function _next(value) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n  }\n  function _throw(err) {\n    asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n  }\n  _next(undefined);\n});",
+          "err": {
+            "message": "Error: playwright lighthouse - Some thresholds are not matching the expectations.\n\nperformance record is 6 and is under the 100 threshold\naccessibility record is 82 and is under the 100 threshold\nseo record is 80 and is under the 100 threshold\npwa record is 36 and is under the 100 threshold",
+            "estack": "Error: playwright lighthouse - Some thresholds are not matching the expectations.\n\nperformance record is 6 and is under the 100 threshold\naccessibility record is 82 and is under the 100 threshold\nseo record is 80 and is under the 100 threshold\npwa record is 36 and is under the 100 threshold\n    at Object.playAudit (node_modules\\playwright-lighthouse\\src\\audit.js:79:11)\n    at runMicrotasks (<anonymous>)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)",
+            "diff": null
+          },
+          "uuid": "a6529148-ee4c-413b-880d-16081068edb1",
+          "parentUUID": "a41647f9-0174-4e2a-80cc-eaff013706f6",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [],
+      "passes": [],
+      "failures": [
+        "a6529148-ee4c-413b-880d-16081068edb1"
+      ],
+      "pending": [],
+      "skipped": [],
+      "duration": 47366,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.0.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "Report"
+      },
+      "version": "5.2.0"
+    }
+  }
+}
