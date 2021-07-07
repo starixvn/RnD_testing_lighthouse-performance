@@ -49,13 +49,7 @@ it('TC000_Full_Smoke Check Performance', async () => {
           emulatedUserAgent: userAgent
         }
     }
-    let defaultThresholds= {
-        performance: 0,
-        accessibility: 100,
-        'best-practices': 100,
-        seo: 100,
-        pwa: 100,
-    }
+   
     await playAudit({
         page: page,
         url : obj.redirectUrl,
@@ -70,7 +64,9 @@ it('TC000_Full_Smoke Check Performance', async () => {
             directory: `${process.cwd()}/lighthouse`, //defaults to `${process.cwd()}/lighthouse`
         },
         thresholds: {
-            performance : 0
+            performance: 50,
+            accessibility: 50,
+            'best-practices': 50
         },
         opts: {
             disableStorageReset : true
